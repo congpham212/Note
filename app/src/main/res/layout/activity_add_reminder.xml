@@ -8,7 +8,7 @@
     android:paddingRight="6dp"
     android:paddingLeft="6dp"
     android:paddingTop="10dp"
-    tools:context=".Main2Activity">
+    tools:context=".AddReminder">
 
     <LinearLayout
         android:id="@+id/ll_1_main2"
