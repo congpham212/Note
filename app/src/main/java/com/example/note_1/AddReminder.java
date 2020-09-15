@@ -12,10 +12,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.NumberPicker;
-import android.widget.TextView;
-import android.widget.Toast;
 
-public class Main2Activity extends AppCompatActivity implements View.OnClickListener {
+public class AddReminder extends AppCompatActivity implements View.OnClickListener {
     
     private EditText et_title;
     private EditText et_content;
@@ -33,7 +31,7 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
+        setContentView(R.layout.activity_add_reminder);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -126,7 +124,7 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
 //                        Log.d(TAG, "onValueChange: ");
                     }
                 });
-                d.setPositiveButton("Done", new DialogInterface.OnClickListener() {
+                d.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 //                        Log.d(TAG, "onClick: " + numberPicker.getValue());
@@ -140,30 +138,6 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
                 AlertDialog alertDialog = d.create();
                 alertDialog.show();
 
-
-//                Toast.makeText(this, String.valueOf(picker.getId()), Toast.LENGTH_LONG).show();
-//                android.support.v7.app.AlertDialog dialogCustom = new android.support.v7.app.AlertDialog.Builder(this)
-//                        .setTitle("")
-//                        .setView(R.layout.chon_thoi_gian_lap_lai)
-//                        .setNegativeButton("OK", new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialogInterface, int i) {
-//                                // ok
-//                            }
-//                        }).setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                // cancel
-//                            }
-//                        })
-//                        .create();
-//                dialogCustom.show();
-//
-//                picker = new NumberPicker(dialogCustom.getContext());
-//                picker = (NumberPicker) findViewById(R.id.number_picker);
-//                picker.setMinValue(0);
-//                picker.setMaxValue(data1.length);
-//                picker.setDisplayedValues(data1);
                 break;
             }
         }
