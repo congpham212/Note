@@ -24,7 +24,8 @@ public class AddReminder extends AppCompatActivity implements View.OnClickListen
     private Button btn_loop;
     private Button btn_everyDay;
 
-    String data[] = new String[]{"giây", "phút","giờ","ngày","tuần","tháng", "năm"};
+    String data[] = new String[]{String.valueOf(R.string.seconds), String.valueOf(R.string.minute), String.valueOf(R.string.hours), String.valueOf(R.string.day),
+            String.valueOf(R.string.week), String.valueOf(R.string.month), String.valueOf(R.string.year)};
 
 
 
@@ -69,14 +70,14 @@ public class AddReminder extends AppCompatActivity implements View.OnClickListen
                 android.support.v7.app.AlertDialog dialogCustom = new android.support.v7.app.AlertDialog.Builder(this)
                         .setTitle("")
                         .setView(R.layout.chon_gio)
-                        .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                        .setNegativeButton(R.string.ok, new DialogInterface.OnClickListener() {
 
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
 
                             }
                         })
-                        .setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
+                        .setPositiveButton(R.string.cancel, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
 
@@ -91,12 +92,12 @@ public class AddReminder extends AppCompatActivity implements View.OnClickListen
                 android.support.v7.app.AlertDialog dialogCustom = new android.support.v7.app.AlertDialog.Builder(this)
                         .setTitle("")
                         .setView(R.layout.chon_gio_va_thu)
-                        .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                        .setNegativeButton(R.string.ok, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 // ok
                             }
-                        }).setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
+                        }).setPositiveButton(R.string.cancel, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 // cancel
@@ -124,13 +125,13 @@ public class AddReminder extends AppCompatActivity implements View.OnClickListen
 //                        Log.d(TAG, "onValueChange: ");
                     }
                 });
-                d.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                d.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 //                        Log.d(TAG, "onClick: " + numberPicker.getValue());
                     }
                 });
-                d.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                d.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                     }

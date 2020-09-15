@@ -33,8 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
         createNote();
 
-        DividerItemDecoration dividerHorizontal =
-                new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
+        DividerItemDecoration dividerHorizontal = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
 
         rv_note.addItemDecoration(dividerHorizontal);
 

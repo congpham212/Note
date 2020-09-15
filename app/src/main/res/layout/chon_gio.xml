@@ -7,7 +7,7 @@
     android:gravity="center">
 
     <TextView
-        android:text="Chọn giờ"
+        android:text="@string/chon_gio"
         android:textStyle="bold"
         android:textSize="18dp"
         android:layout_marginTop="10dp"
@@ -22,7 +22,7 @@
     </TimePicker>
 
     <TextView
-        android:text="Chọn ngày"
+        android:text="@string/chon_ngay"
         android:textStyle="bold"
         android:textSize="18dp"
         android:layout_marginTop="30dp"

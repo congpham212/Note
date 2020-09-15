@@ -22,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="18dp"
-            android:hint="Title"
+            android:hint="@string/title"
             android:textStyle="bold"
             android:gravity="center"
             android:paddingBottom="5dp"/>
@@ -47,19 +47,19 @@
                 android:id="@+id/btn_1_lan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Một lần" />
+                android:text="@string/once" />
 
             <Button
                 android:id="@+id/btn_lapLai"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Lặp lại" />
+                android:text="@string/repeat" />
 
             <Button
                 android:id="@+id/btn_hangNgay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Hàng ngày" />
+                android:text="@string/daily" />
 
 
         </LinearLayout>
