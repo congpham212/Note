@@ -7,7 +7,7 @@
     android:orientation="vertical">
 
     <TextView
-        android:text="Chọn giờ"
+        android:text="@string/chon_gio"
         android:textStyle="bold"
         android:textSize="18dp"
         android:layout_marginTop="10dp"
