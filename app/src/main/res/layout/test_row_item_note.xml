@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="3dp"
+    android:paddingRight="6dp"
+    android:paddingLeft="6dp"
+    android:paddingTop="3dp"
+    android:background="#efefef"
+    android:weightSum="20"
+    >
+
+    <FrameLayout
+        android:id="@+id/fl_1_date_main3_1"
+        android:layout_weight="2"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:layout_centerVertical="true"
+        >
+
+        <CheckBox
+            android:layout_gravity="center"
+            android:id="@+id/cb_main3_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </FrameLayout>
+
+    <FrameLayout
+
+        android:id="@+id/fl_2_date_main3_1"
+        android:layout_weight="3"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:layout_centerVertical="true"
+        >
+
+        <TextView
+            android:layout_gravity="center"
+            android:id="@+id/tv_date_main3_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#19b395"/>
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_main3_1"
+        android:layout_weight="12"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:layout_marginLeft="8dp"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:id="@+id/tv_title_main3_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:textColor="#2c3e50"
+            android:textSize="16dp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/tv_content_main3_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:textColor="#34495e"
+            android:textSize="14dp"/>
+
+
+        <TextView
+            android:id="@+id/tv_remind_main3_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#7f8c8d"
+            android:textSize="14dp"
+            />
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_weight="3"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        >
+        <Switch
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </FrameLayout>
+
+</LinearLayout>
