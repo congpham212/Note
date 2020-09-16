@@ -1,8 +1,11 @@
 package com.example.note_1;
 
 
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,7 +36,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
     @NonNull
     @Override
     public NoteViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View itemView = layoutInflater.inflate(R.layout.row_item_note, viewGroup,false);
+        View itemView = layoutInflater.inflate(R.layout.test_row_item_note, viewGroup,false);
         return new NoteViewHolder(itemView);
     }
 
@@ -87,6 +90,28 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
                         Toast.makeText(context,"id: " + note.getId() + " --- Title: " + note.getTitle(), Toast.LENGTH_SHORT).show();
                     }
 
+                }
+            });
+
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    AlertDialog.Builder delete = new AlertDialog.Builder(context);
+                    delete.setTitle(R.string.remove_reminder)
+                            .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            })
+                            .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            });
+
+                    return false;
                 }
             });
         }
