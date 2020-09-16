@@ -2,12 +2,12 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="300dp"
+    android:layout_height="400dp"
     android:gravity="center"
     android:orientation="vertical">
 
     <TextView
-        android:text="Chọn giờ"
+        android:text="@string/chon_gio"
         android:textStyle="bold"
         android:textSize="18dp"
         android:layout_marginTop="10dp"

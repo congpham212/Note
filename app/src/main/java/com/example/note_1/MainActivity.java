@@ -2,19 +2,25 @@ package com.example.note_1;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private Button btnAddNote;
     private Intent intent;
     private Context context;
+    private RecyclerView rv_note;
+    private NoteAdapter noteAdapter;
+    private List<Note> noteList;
 
 
     @Override
@@ -25,6 +31,29 @@ public class MainActivity extends AppCompatActivity {
         anhXa();
         controlButton(this);
 
+        createNote();
+
+        DividerItemDecoration dividerHorizontal = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
+
+        rv_note.addItemDecoration(dividerHorizontal);
+
+        noteAdapter = new NoteAdapter(noteList, this);
+        rv_note.setAdapter(noteAdapter);
+
+//        RecyclerView scroll vertical
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        rv_note.setLayoutManager(linearLayoutManager);
+
+    }
+
+    private void createNote() {
+        noteList = new ArrayList<>();
+        noteList.add(new Note(1,"shoping","8:00",1,false));
+        noteList.add(new Note(2,"cbvcb","11:00",1,false));
+        noteList.add(new Note(3,"shcvboping","2:00",1,false));
+        noteList.add(new Note(4,"ytu","8:00",1,false));
+        noteList.add(new Note(5,"eqr","8:00",1,false));
+        noteList.add(new Note(6,"lik","8:00",1,false));
     }
 
     private void controlButton(final Activity main) {
@@ -32,8 +61,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                intent = new Intent(main, Main2Activity.class);
+                intent = new Intent(main, AddReminderActivity.class);
                 startActivity(intent);
+
+
 //                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this, android.R.style.Theme_DeviceDefault_Light_Dialog);
 //                builder.setTitle("Bạn có chắc muốn thoát khỏi app");
 //                builder.setMessage("Hãy lựa chọ bên dưới để xác nhận");
@@ -59,7 +90,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void anhXa() {
-        btnAddNote = (Button) findViewById(R.id.btn_add);
+        btnAddNote = findViewById(R.id.btn_add);
+        rv_note = findViewById(R.id.rv_main3_1);
 
     }
 
