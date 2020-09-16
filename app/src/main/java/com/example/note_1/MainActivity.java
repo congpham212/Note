@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                intent = new Intent(main, AddReminder.class);
+                intent = new Intent(main, AddReminderActivity.class);
                 startActivity(intent);
 
 

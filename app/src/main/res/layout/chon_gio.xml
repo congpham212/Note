@@ -22,12 +22,12 @@
     </TimePicker>
 
     <TextView
-        android:text="@string/chon_ngay"
-        android:textStyle="bold"
-        android:textSize="18dp"
-        android:layout_marginTop="30dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/chon_ngay"
+        android:textSize="18dp"
+        android:textStyle="bold" />
 
     <DatePicker
         android:id="@+id/datePicker"

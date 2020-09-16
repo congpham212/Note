@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,67 +8,42 @@
     android:paddingRight="6dp"
     android:paddingLeft="6dp"
     android:paddingTop="10dp"
-    tools:context=".AddReminder">
+    tools:context=".AddReminderActivity"
+    android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/ll_1_main2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-       >
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <EditText
             android:id="@+id/et_tile_main2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:hint="@string/title"
-            android:textStyle="bold"
             android:gravity="center"
-            android:paddingBottom="5dp"/>
+            android:hint="@string/title"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/et_content_main2"
             android:layout_width="match_parent"
-            android:layout_height="450dp"
-            android:gravity="left"/>
-
-        <LinearLayout
-            android:id="@+id/ll_2_main2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:paddingTop="15dp"
-            android:paddingBottom="10dp">
-
-            <Button
-                android:id="@+id/btn_1_lan"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/once" />
-
-            <Button
-                android:id="@+id/btn_lapLai"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/repeat" />
-
-            <Button
-                android:id="@+id/btn_hangNgay"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/daily" />
-
-
-        </LinearLayout>
-
+            android:layout_height="200dp"
+            android:gravity="left" />
 
     </LinearLayout>
-
-
-
-
-
-</RelativeLayout>
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tl_mode_notif"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_mode_notif"
+        android:layout_width="wrap_content"
+        android:layout_height="400dp"/>
+</LinearLayout>
+</LinearLayout>
