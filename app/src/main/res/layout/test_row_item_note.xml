@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingBottom="3dp"
     android:paddingRight="6dp"
@@ -14,13 +15,13 @@
         android:id="@+id/fl_1_date_main3_1"
         android:layout_weight="2"
         android:layout_width="0dp"
-        android:layout_height="70dp"
+        android:layout_height="60dp"
         android:layout_centerVertical="true"
         >
 
         <CheckBox
             android:layout_gravity="center"
-            android:id="@+id/cb_main3_1"
+            android:id="@+id/cb_done_reminder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -31,16 +32,17 @@
         android:id="@+id/fl_2_date_main3_1"
         android:layout_weight="3"
         android:layout_width="0dp"
-        android:layout_height="70dp"
+        android:layout_height="60dp"
         android:layout_centerVertical="true"
         >
 
         <TextView
             android:layout_gravity="center"
-            android:id="@+id/tv_date_main3_1"
+            android:id="@+id/tv_time_reminder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#19b395"/>
+            android:textColor="#19b395"
+            android:textSize="16sp"/>
 
     </FrameLayout>
 
@@ -48,35 +50,26 @@
         android:id="@+id/ll_main3_1"
         android:layout_weight="12"
         android:layout_width="0dp"
-        android:layout_height="70dp"
+        android:layout_height="60dp"
         android:layout_marginLeft="8dp"
         android:orientation="vertical"
         >
 
         <TextView
-            android:id="@+id/tv_title_main3_1"
+            android:id="@+id/tv_title_reminder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:textColor="#2c3e50"
-            android:textSize="16dp"
+            android:textSize="22sp"
             android:textStyle="bold"/>
 
         <TextView
-            android:id="@+id/tv_content_main3_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:textColor="#34495e"
-            android:textSize="14dp"/>
-
-
-        <TextView
-            android:id="@+id/tv_remind_main3_1"
+            android:id="@+id/tv_mode_alarm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#7f8c8d"
-            android:textSize="14dp"
+            android:textSize="18sp"
             />
 
     </LinearLayout>
@@ -84,11 +77,16 @@
     <FrameLayout
         android:layout_weight="3"
         android:layout_width="0dp"
-        android:layout_height="70dp"
+        android:layout_height="60dp"
         >
-        <Switch
+
+        <ImageButton
+            android:id="@+id/ib_alarm"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/custom_checkbox_checked"
+            android:src="@drawable/ic_on_alarm_24" />
     </FrameLayout>
 
 </LinearLayout>

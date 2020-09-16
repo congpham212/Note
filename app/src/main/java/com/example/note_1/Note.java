@@ -1,30 +1,39 @@
 package com.example.note_1;
 
 public class Note {
-    private String id;
-    private String date;
+    private int id;
     private String title;
-    private String content;
-    private String remind;
+    private String time;
+    private int modeAlarm;
+    private boolean done;
+    private boolean alarm;
 
     public Note(){
 
     }
 
-    public Note(String id, String date, String title, String content, String remind) {
+    public Note(int id, String title, String time, int modeAlarm, boolean alarm) {
         this.id = id;
-        this.date = date;
         this.title = title;
-        this.content = content;
-        this.remind = remind;
+        this.time = time;
+        this.modeAlarm = modeAlarm;
+        this.alarm = alarm;
     }
 
-    public String getDate() {
-        return date;
+    public int getId() {
+        return id;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public String getTitle() {
@@ -35,27 +44,27 @@ public class Note {
         this.title = title;
     }
 
-    public String getContent() {
-        return content;
+    public int getModeAlarm() {
+        return modeAlarm;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setModeAlarm(int modeAlarm) {
+        this.modeAlarm = modeAlarm;
     }
 
-    public String getRemind() {
-        return remind;
+    public boolean isDone() {
+        return done;
     }
 
-    public void setRemind(String remind) {
-        this.remind = remind;
+    public void setDone(boolean done) {
+        this.done = done;
     }
 
-    public String getId() {
-        return id;
+    public boolean isAlarm() {
+        return alarm;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setAlarm(boolean alarm) {
+        this.alarm = alarm;
     }
 }

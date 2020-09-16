@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CheckedTextView;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,11 +45,10 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
     public void onBindViewHolder(@NonNull NoteViewHolder noteViewHolder, int i) {
         Note note = noteList.get(i);
 
-        noteViewHolder.tv_date.setText(note.getDate());
+        noteViewHolder.tv_time.setText(note.getTime());
         noteViewHolder.tv_title.setText(note.getTitle());
-        noteViewHolder.tv_content.setText(note.getContent());
-        noteViewHolder.tv_remind.setText(note.getRemind());
-
+        noteViewHolder.tv_mode_alarm.setText(Integer.toString(note.getModeAlarm()));
+        noteViewHolder.ib_alarm.setImageResource(note.isAlarm() ? R.drawable.ic_on_alarm_24 : R.drawable.ic_off_alarm_24);
     }
 
     @Override
@@ -59,20 +59,18 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
     class NoteViewHolder extends RecyclerView.ViewHolder{
 
         private CheckBox cb_id;
-        private TextView tv_date;
+        private TextView tv_time;
         private TextView tv_title;
-        private TextView tv_content;
-        private TextView tv_remind;
-        private CheckedTextView ctv;
+        private TextView tv_mode_alarm;
+        private ImageButton ib_alarm;
 
         public NoteViewHolder(@NonNull View itemView) {
             super(itemView);
-            tv_content = (TextView) itemView.findViewById(R.id.tv_content_main3_1);
-            tv_date = (TextView) itemView.findViewById(R.id.tv_date_main3_1);
-            tv_title = (TextView) itemView.findViewById(R.id.tv_title_main3_1);
-            tv_remind = (TextView) itemView.findViewById(R.id.tv_remind_main3_1);
-            cb_id = (CheckBox) itemView.findViewById(R.id.cb_main3_1);
-//            ctv = (CheckedTextView) itemView.findViewById(R.id.ctv_main3_1);
+            tv_time = itemView.findViewById(R.id.tv_time_reminder);
+            tv_title = itemView.findViewById(R.id.tv_title_reminder);
+            tv_mode_alarm = itemView.findViewById(R.id.tv_mode_alarm);
+            cb_id = itemView.findViewById(R.id.cb_done_reminder);
+            ib_alarm = itemView.findViewById(R.id.ib_alarm);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -112,6 +110,23 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
                             });
 
                     return false;
+                }
+            });
+
+            ib_alarm.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Note note = noteList.get(getAdapterPosition());
+                    if (note.isAlarm()) {
+                        note.setAlarm(false);
+                        ib_alarm.setImageResource(R.drawable.ic_off_alarm_24);
+                        Toast.makeText(context,"F", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        note.setAlarm(true);
+                        ib_alarm.setImageResource(R.drawable.ic_on_alarm_24);
+                        Toast.makeText(context,"T", Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
         }

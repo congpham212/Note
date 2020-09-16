@@ -21,7 +21,7 @@
             android:id="@+id/et_tile_main2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="18dp"
+            android:textSize="18sp"
             android:hint="@string/title"
             android:textStyle="bold"
             android:gravity="center"
@@ -63,6 +63,7 @@
 
 
         </LinearLayout>
+
 
     </LinearLayout>
 

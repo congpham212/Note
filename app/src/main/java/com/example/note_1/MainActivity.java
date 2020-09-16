@@ -48,20 +48,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void createNote() {
         noteList = new ArrayList<>();
-        noteList.add(new Note("1","5:00", "Dạy đi", "dậy tập thể dục", "hàng ngày"));
-        noteList.add(new Note("2","6:00", "Ăn sáng ", "dậy ăn sáng", "hằng ngày"));
-        noteList.add(new Note("3","6:30", "Dạy đi học", "đi học", "hàng ngày"));
-        noteList.add(new Note("5","7:00", "Vào học ", "dậy ăn sáng", "hằng ngày"));
-        noteList.add(new Note("7","7:30", "Dạy đi", "dậy tập thể dục", "hàng ngày"));
-        noteList.add(new Note("8","8:00", "Ăn sáng ", "dậy ăn sáng", "hằng ngày"));
-        noteList.add(new Note("9","8:30", "Dạy đi", "dậy tập thể dục", "hàng ngày"));
-        noteList.add(new Note("10","9:00", "Ăn sáng ", "dậy ăn sáng", "hằng ngày"));
-        noteList.add(new Note("11","9:30", "Dạy đi", "dậy tập thể dục", "hàng ngày"));
-        noteList.add(new Note("12","10:00", "Ăn sáng ", "dậy ăn sáng", "hằng ngày"));
-        noteList.add(new Note("9","8:30", "Dạy đi", "dậy tập thể dục", "hàng ngày"));
-        noteList.add(new Note("10","9:00", "Ăn sáng ", "dậy ăn sáng", "hằng ngày"));
-        noteList.add(new Note("11","9:30", "Dạy đi", "dậy tập thể dục", "hàng ngày"));
-        noteList.add(new Note("12","10:00", "Ăn sáng ", "dậy ăn sáng", "hằng ngày"));
+        noteList.add(new Note(1,"shoping","8:00",1,false));
+        noteList.add(new Note(2,"cbvcb","11:00",1,false));
+        noteList.add(new Note(3,"shcvboping","2:00",1,false));
+        noteList.add(new Note(4,"ytu","8:00",1,false));
+        noteList.add(new Note(5,"eqr","8:00",1,false));
+        noteList.add(new Note(6,"lik","8:00",1,false));
     }
 
     private void controlButton(final Activity main) {
@@ -98,8 +90,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void anhXa() {
-        btnAddNote = (Button) findViewById(R.id.btn_add);
-        rv_note = (RecyclerView) findViewById(R.id.rv_main3_1);
+        btnAddNote = findViewById(R.id.btn_add);
+        rv_note = findViewById(R.id.rv_main3_1);
 
     }
 
