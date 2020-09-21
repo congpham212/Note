@@ -12,9 +12,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.NumberPicker;
+import android.widget.Spinner;
+
+import java.lang.reflect.Array;
 
 public class AddReminderActivity extends AppCompatActivity implements View.OnClickListener {
     
@@ -40,7 +44,8 @@ public class AddReminderActivity extends AppCompatActivity implements View.OnCli
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
-        
+
+
         anhXa();
 
         final TabLayout tlModeNotif = findViewById(R.id.tl_mode_notif);

@@ -7,6 +7,8 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 public class ModeNotifPagerAdapter extends FragmentPagerAdapter {
     private int numOfTab = 3;
@@ -73,7 +75,13 @@ public class ModeNotifPagerAdapter extends FragmentPagerAdapter {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             // Inflate the layout for this fragment
-            return inflater.inflate(R.layout.chon_thoi_gian_lap_lai, container, false);
+            View view = inflater.inflate(R.layout.chon_thoi_gian_lap_lai, container, false);
+            Spinner spLoopMode = (Spinner) view.findViewById(R.id.spLoopMode);
+            String listLoopMode[] = {"Phút", "Giờ", "Ngày", "Tuần", "Tháng", "Năm"};
+            ArrayAdapter adapterSensorName = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_spinner_dropdown_item, listLoopMode);
+            adapterSensorName.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
+            spLoopMode.setAdapter(adapterSensorName);
+            return view;
         }
     }
 }
