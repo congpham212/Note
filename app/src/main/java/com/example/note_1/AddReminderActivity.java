@@ -31,8 +31,6 @@ public class AddReminderActivity extends AppCompatActivity implements View.OnCli
     private Button btn_loop;
     private Button btn_everyDay;
 
-    String data[] = new String[]{String.valueOf(R.string.seconds), String.valueOf(R.string.minute), String.valueOf(R.string.hours), String.valueOf(R.string.day),
-            String.valueOf(R.string.week), String.valueOf(R.string.month), String.valueOf(R.string.year)};
 
 
 
