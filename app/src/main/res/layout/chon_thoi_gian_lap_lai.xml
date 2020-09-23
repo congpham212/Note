@@ -24,6 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="88dp"
         android:textAlignment="center"
+        android:text="10"
         android:textSize="18dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -31,11 +32,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Spinner
-        android:id="@+id/spLoopMode"
-        android:layout_width="105dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="108dp"
+    <NumberPicker
+        android:id="@+id/number_Picker"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:layout_marginTop="50dp"
         android:layout_weight="1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.781"
