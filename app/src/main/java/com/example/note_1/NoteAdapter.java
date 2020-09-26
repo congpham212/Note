@@ -4,6 +4,7 @@ package com.example.note_1;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
@@ -49,6 +50,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
         noteViewHolder.tv_title.setText(note.getTitle());
         noteViewHolder.tv_mode_alarm.setText(Integer.toString(note.getModeAlarm()));
         noteViewHolder.ib_alarm.setImageResource(note.isAlarm() ? R.drawable.ic_on_alarm_24 : R.drawable.ic_off_alarm_24);
+        noteViewHolder.cb_done.setChecked(note.isDone());
     }
 
     @Override
@@ -58,7 +60,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
 
     class NoteViewHolder extends RecyclerView.ViewHolder{
 
-        private CheckBox cb_id;
+        private CheckBox cb_done;
         private TextView tv_time;
         private TextView tv_title;
         private TextView tv_mode_alarm;
@@ -69,24 +71,33 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
             tv_time = itemView.findViewById(R.id.tv_time_reminder);
             tv_title = itemView.findViewById(R.id.tv_title_reminder);
             tv_mode_alarm = itemView.findViewById(R.id.tv_mode_alarm);
-            cb_id = itemView.findViewById(R.id.cb_done_reminder);
+            cb_done = itemView.findViewById(R.id.cb_done_reminder);
             ib_alarm = itemView.findViewById(R.id.ib_alarm);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Note note = noteList.get(getAdapterPosition());
-                    Toast.makeText(context, note.getTitle(), Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(context, AddReminderActivity.class);
+                    int id = noteList.get(getAdapterPosition()).getId();
+                    intent.putExtra("idNote", id);
+                    context.startActivity(intent);
+
+                    //Toast.makeText(context, note.getTitle(), Toast.LENGTH_SHORT).show();
                 }
             });
 
-            cb_id.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            cb_done.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    Note note = noteList.get(getAdapterPosition());
                     if(isChecked){
-                        Note note = noteList.get(getAdapterPosition());
-                        Toast.makeText(context,"id: " + note.getId() + " --- Title: " + note.getTitle(), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(context,"id: " + note.getId() + " --- Title: " + note.getTitle(), Toast.LENGTH_SHORT).show();
                     }
+                    note.setDone(isChecked);
+                    MyDatabaseHelper db = new MyDatabaseHelper(context);
+                    db.editNote(note.getId(),note);
 
                 }
             });
@@ -94,12 +105,14 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
             itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    AlertDialog.Builder delete = new AlertDialog.Builder(context);
-                    delete.setTitle(R.string.remove_reminder)
+                    Toast.makeText(context, "onLong", Toast.LENGTH_SHORT).show();
+                    AlertDialog.Builder deleteDialog = new AlertDialog.Builder(context);
+                    deleteDialog.setTitle(R.string.remove_reminder)
                             .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-
+                                    MyDatabaseHelper db = new MyDatabaseHelper(context);
+                                    db.deleteNote(noteList.get(getAdapterPosition()).getId());
                                 }
                             })
                             .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -108,8 +121,8 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
 
                                 }
                             });
-
-                    return false;
+                    deleteDialog.show();
+                    return true; // tat su kien on click khi on long click
                 }
             });
 
@@ -127,6 +140,8 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
                         ib_alarm.setImageResource(R.drawable.ic_on_alarm_24);
                         Toast.makeText(context,"T", Toast.LENGTH_SHORT).show();
                     }
+                    MyDatabaseHelper db = new MyDatabaseHelper(context);
+                    db.editNote(note.getId(),note);
                 }
             });
         }

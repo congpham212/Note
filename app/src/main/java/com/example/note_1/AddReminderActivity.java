@@ -3,6 +3,7 @@ package com.example.note_1;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -30,9 +31,8 @@ public class AddReminderActivity extends AppCompatActivity implements View.OnCli
 
     private Context context = this;
     
-    private Button btn_once;
-    private Button btn_loop;
-    private Button btn_everyDay;
+    private boolean isModeAdd;
+    private int idNote;
 
     EditText et;
 
@@ -48,10 +48,6 @@ public class AddReminderActivity extends AppCompatActivity implements View.OnCli
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
-
-
-
-
         anhXa();
 
         final TabLayout tlModeNotif = findViewById(R.id.tl_mode_notif);
@@ -60,7 +56,20 @@ public class AddReminderActivity extends AppCompatActivity implements View.OnCli
         vpModeNotif.setAdapter(pgAdapter);
         tlModeNotif.setupWithViewPager(vpModeNotif);
         vpModeNotif.getCurrentItem();
-        vpModeNotif.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+
+        Intent intent = getIntent();
+        idNote = intent.getExtras().getInt("idNote");
+        if (idNote != -1)
+        {
+            isModeAdd = false;
+            MyDatabaseHelper db = new MyDatabaseHelper(this);
+            Note note = db.getNote(idNote);
+            et_title.setText(note.getTitle());
+            et_content.setText(note.getContent());
+        }
+        else isModeAdd = true;
+
+        /*vpModeNotif.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int i, float v, int i1) {
 
@@ -88,7 +97,7 @@ public class AddReminderActivity extends AppCompatActivity implements View.OnCli
             public void onPageScrollStateChanged(int i) {
 
             }
-        });
+        });*/
 
 //        et.setText("10");
 
@@ -113,25 +122,16 @@ public class AddReminderActivity extends AppCompatActivity implements View.OnCli
                 return true;
 
             case R.id.save_reminder:
-//                Toast.makeText(context, "Da luu", Toast.LENGTH_LONG).show();
-                save();
-//                finish();
+                String titleNote = String.valueOf(et_title.getText());
+                String contentNote = String.valueOf(et_content.getText());
+                MyDatabaseHelper db = new MyDatabaseHelper(this);
+                if (isModeAdd)
+                db.addNote(new Note(titleNote, contentNote, "", 0, true));
+                else db.editNote(idNote, new Note(titleNote, contentNote, "", 0, true));
+                finish();
                 return true;
         }
         return super .onOptionsItemSelected(item);
-    }
-
-    private void save() {
-        if(et == null){
-            Toast.makeText(context, "NULL", Toast.LENGTH_LONG).show();
-        }
-        else{
-            Toast.makeText(context, s, Toast.LENGTH_LONG).show();
-        }
-
-//        s = String.valueOf(et.getText()) == null ? "NULL" : String.valueOf(et.getText());
-
-
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.example.note_1;
 public class Note {
     private int id;
     private String title;
+    private String content;
     private String time;
     private int modeAlarm;
     private boolean done;
@@ -12,9 +13,19 @@ public class Note {
 
     }
 
-    public Note(int id, String title, String time, int modeAlarm, boolean alarm) {
+    public Note(int id, String title, String content, String time, int modeAlarm, boolean alarm, boolean done) {
         this.id = id;
         this.title = title;
+        this.content = content;
+        this.time = time;
+        this.modeAlarm = modeAlarm;
+        this.alarm = alarm;
+        this.done = done;
+    }
+
+    public Note(String title, String content, String time, int modeAlarm, boolean alarm) {
+        this.title = title;
+        this.content = content;
         this.time = time;
         this.modeAlarm = modeAlarm;
         this.alarm = alarm;
@@ -66,5 +77,13 @@ public class Note {
 
     public void setAlarm(boolean alarm) {
         this.alarm = alarm;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 }

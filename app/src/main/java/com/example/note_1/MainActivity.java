@@ -8,8 +8,12 @@ import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
+import com.amitshekhar.DebugDB;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,15 +32,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Log.d("addr", DebugDB.getAddressLog());
+
         anhXa();
         controlButton(this);
 
-        createNote();
+        /*createNote();*/
 
         DividerItemDecoration dividerHorizontal = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
-
         rv_note.addItemDecoration(dividerHorizontal);
 
+        // Lay du lieu note tu database
+        MyDatabaseHelper db =new MyDatabaseHelper(this);
+        noteList = db.getAllNote();
+
+        // do du lieu ra man hinh
         noteAdapter = new NoteAdapter(noteList, this);
         rv_note.setAdapter(noteAdapter);
 
@@ -46,7 +56,19 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void createNote() {
+    @Override
+    protected void onResume() {
+        super.onResume();
+        refresh();
+    }
+
+    public void refresh(){
+        MyDatabaseHelper db = new MyDatabaseHelper(this);
+        noteList = db.getAllNote();
+        noteAdapter = new NoteAdapter(noteList, this);
+        rv_note.setAdapter(noteAdapter);
+    }
+    /*private void createNote() {
         noteList = new ArrayList<>();
         noteList.add(new Note(1,"shoping","8:00",1,false));
         noteList.add(new Note(2,"cbvcb","11:00",1,false));
@@ -54,7 +76,8 @@ public class MainActivity extends AppCompatActivity {
         noteList.add(new Note(4,"ytu","8:00",1,false));
         noteList.add(new Note(5,"eqr","8:00",1,false));
         noteList.add(new Note(6,"lik","8:00",1,false));
-    }
+    }*/
+
 
     private void controlButton(final Activity main) {
         btnAddNote.setOnClickListener(new View.OnClickListener() {
@@ -62,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 intent = new Intent(main, AddReminderActivity.class);
+                intent.putExtra("idNote",-1);
                 startActivity(intent);
 
 
