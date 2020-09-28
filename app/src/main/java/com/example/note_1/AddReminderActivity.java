@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.SystemClock;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -37,8 +38,8 @@ public class AddReminderActivity extends AppCompatActivity implements View.OnCli
     EditText et;
 
     ModeNotifPagerAdapter pgAdapter;
-    String s = "hahaha";
-
+    TabLayout tlModeNotif;
+    ViewPager vpModeNotif;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +51,8 @@ public class AddReminderActivity extends AppCompatActivity implements View.OnCli
 
         anhXa();
 
-        final TabLayout tlModeNotif = findViewById(R.id.tl_mode_notif);
-        final ViewPager vpModeNotif = findViewById(R.id.vp_mode_notif);
+        tlModeNotif = findViewById(R.id.tl_mode_notif);
+        vpModeNotif = findViewById(R.id.vp_mode_notif);
         pgAdapter = new ModeNotifPagerAdapter(getSupportFragmentManager());
         vpModeNotif.setAdapter(pgAdapter);
         tlModeNotif.setupWithViewPager(vpModeNotif);
@@ -66,10 +67,25 @@ public class AddReminderActivity extends AppCompatActivity implements View.OnCli
             Note note = db.getNote(idNote);
             et_title.setText(note.getTitle());
             et_content.setText(note.getContent());
+
+            int modeAlarm = note.getModeAlarm();
+            vpModeNotif.setCurrentItem(modeAlarm);
+            String timeString = note.getTime();
+
+            switch (modeAlarm){
+                case 0:
+                    //Log.d("addReminderActivity", String.valueOf(pgAdapter.tab1.timePickerMode_1.isShown()));
+                    break;
+                case 1:
+                    int hour = Integer.parseInt(timeString.substring(0,2));
+                    //Log.d("addReminderActivity", "pgAdapter.tab2.getHour()");
+                    ;
+            }
+
         }
         else isModeAdd = true;
 
-        /*vpModeNotif.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        vpModeNotif.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int i, float v, int i1) {
 
@@ -77,27 +93,20 @@ public class AddReminderActivity extends AppCompatActivity implements View.OnCli
 
             @Override
             public void onPageSelected(int i) {
-                if(i == 0){
-                    ModeNotifPagerAdapter.mode_notif_1 a = new ModeNotifPagerAdapter.mode_notif_1();
+                /*if (pgAdapter.tab1 == null)
+                    Log.d("addReminderActivity", "tab1");
+                if (pgAdapter.tab2 == null)
+                    Log.d("addReminderActivity", "tab2");
+                if (pgAdapter.tab3 == null)
+                    Log.d("addReminderActivity", "tab3");*/
 
-                    Log.e("ZZZZZZZZZZZ: ", "0000000000000000000000");
-                }
-                if(i == 1){
-                    Log.e("ZZZZZZZZZZZ: ", "1111111111111111111111");
-                }
-                if(i == 2){
-                    ModeNotifPagerAdapter.mode_notif_3 mode3 = new ModeNotifPagerAdapter.mode_notif_3();
-                   mode3.anhXa();
-                    String s = mode3.getTime_repeat() == null ? "Null" : "Not NULL";
-                    Log.e("ZZZZZZZZZZZ: ", s);
-                }
             }
 
             @Override
             public void onPageScrollStateChanged(int i) {
 
             }
-        });*/
+        });
 
 //        et.setText("10");
 
@@ -124,11 +133,33 @@ public class AddReminderActivity extends AppCompatActivity implements View.OnCli
             case R.id.save_reminder:
                 String titleNote = String.valueOf(et_title.getText());
                 String contentNote = String.valueOf(et_content.getText());
+                String hour, day, timeRepeat, type, timeString = "";
+
+                // Lay thoi gian thong bao de luu vao database
+                int position = vpModeNotif.getCurrentItem();
+                if(position == 0){
+                    hour = pgAdapter.tab1.getHour();
+                    day = pgAdapter.tab1.getDay();
+                    timeString = hour + ", " + day;
+                } else
+                if(position == 1){
+                    hour = pgAdapter.tab2.getHour();
+                    day = pgAdapter.tab2.getDay();
+                    timeString = hour + ", " + day;
+                } else
+                if(position == 2){
+                    timeRepeat = pgAdapter.tab3.getTimeRepeat();
+                    type = pgAdapter.tab3.getTime_type();
+                    timeString = "Mỗi " + timeRepeat + " " + type;
+                }
+
                 MyDatabaseHelper db = new MyDatabaseHelper(this);
                 if (isModeAdd)
-                db.addNote(new Note(titleNote, contentNote, "", 0, true));
-                else db.editNote(idNote, new Note(titleNote, contentNote, "", 0, true));
+                    db.addNote(new Note(titleNote, contentNote, timeString, position, true));
+                else db.editNote(idNote, new Note(titleNote, contentNote, timeString, position, true));
+
                 finish();
+
                 return true;
         }
         return super .onOptionsItemSelected(item);
@@ -138,4 +169,5 @@ public class AddReminderActivity extends AppCompatActivity implements View.OnCli
     public void onClick(View view) {
 
     }
+
 }

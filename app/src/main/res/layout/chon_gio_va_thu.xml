@@ -103,7 +103,7 @@
         android:gravity="center">
 
         <CheckBox
-            android:id="@+id/btn_monday"
+            android:id="@+id/cb_monday"
             android:layout_marginRight="10dp"
             android:layout_width="30dp"
             android:layout_height="30dp"
@@ -112,7 +112,7 @@
         />
 
         <CheckBox
-            android:id="@+id/btn_tuesday"
+            android:id="@+id/cb_tuesday"
             android:layout_marginRight="10dp"
             android:layout_width="30dp"
             android:layout_height="30dp"
@@ -121,7 +121,7 @@
         />
 
         <CheckBox
-            android:id="@+id/btn_wednesday"
+            android:id="@+id/cb_wednesday"
             android:layout_marginRight="10dp"
             android:layout_width="30dp"
             android:layout_height="30dp"
@@ -130,7 +130,7 @@
             />
 
         <CheckBox
-            android:id="@+id/btn_thursday"
+            android:id="@+id/cb_thursday"
             android:layout_marginRight="10dp"
             android:layout_width="30dp"
             android:layout_height="30dp"
@@ -139,7 +139,7 @@
             />
 
         <CheckBox
-            android:id="@+id/btn_friday"
+            android:id="@+id/cb_friday"
             android:layout_marginRight="10dp"
             android:layout_width="30dp"
             android:layout_height="30dp"
@@ -148,7 +148,7 @@
             />
 
         <CheckBox
-            android:id="@+id/btn_saturday"
+            android:id="@+id/cb_saturday"
             android:layout_marginRight="10dp"
             android:layout_width="30dp"
             android:layout_height="30dp"
@@ -157,7 +157,7 @@
         />
 
         <CheckBox
-            android:id="@+id/btn_sunday"
+            android:id="@+id/cb_sunday"
             android:layout_marginRight="10dp"
             android:layout_width="30dp"
             android:layout_height="30dp"

@@ -21,7 +21,6 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     private Button btnAddNote;
     private Intent intent;
-    private Context context;
     private RecyclerView rv_note;
     private NoteAdapter noteAdapter;
     private List<Note> noteList;
@@ -33,7 +32,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //Log.d("addr", DebugDB.getAddressLog());
-
+        Intent intentReceiver = getIntent();
+        if (intentReceiver.hasExtra("finish")) finish();
         anhXa();
         controlButton(this);
 

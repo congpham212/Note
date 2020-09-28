@@ -113,6 +113,10 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
                                 public void onClick(DialogInterface dialog, int which) {
                                     MyDatabaseHelper db = new MyDatabaseHelper(context);
                                     db.deleteNote(noteList.get(getAdapterPosition()).getId());
+                                    Intent intent = new Intent(context, MainActivity.class);
+                                    intent.putExtra("finish","finish");
+                                    context.startActivity(intent);
+
                                 }
                             })
                             .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
