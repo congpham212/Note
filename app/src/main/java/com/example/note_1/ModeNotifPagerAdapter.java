@@ -22,8 +22,26 @@ public class ModeNotifPagerAdapter extends FragmentPagerAdapter {
     mode_notif_1 tab1 = new mode_notif_1();
     mode_notif_2 tab2 = new mode_notif_2();
     mode_notif_3 tab3 = new mode_notif_3();
+
     public ModeNotifPagerAdapter(FragmentManager fm) {
         super(fm);
+    }
+
+    public ModeNotifPagerAdapter(FragmentManager fm, int modeAlarm, String timeString) {
+        super(fm);
+        switch (modeAlarm){
+            case 0:
+                tab1 = mode_notif_1.newInstance(timeString);
+                break;
+            case 1:
+                tab2 = mode_notif_2.newInstance(timeString);
+                break;
+            case 2:
+                tab3 = mode_notif_3.newInstance(timeString);
+                break;
+            default:
+                break;
+        }
     }
 
     @Override
@@ -65,13 +83,36 @@ public class ModeNotifPagerAdapter extends FragmentPagerAdapter {
         TimePicker timePickerMode_1;
         DatePicker datePickerMode_1;
 
+        public static mode_notif_1 newInstance(String timeString) {
+
+            Bundle args = new Bundle();
+            args.putString("timeString", timeString);
+
+            mode_notif_1 fragment = new mode_notif_1();
+            fragment.setArguments(args);
+            return fragment;
+        }
+
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             view = inflater.inflate(R.layout.chon_gio, container, false);
             timePickerMode_1 = view.findViewById(R.id.timePicker1);
             datePickerMode_1 = view.findViewById(R.id.datePicker);
-            //Log.d("addReminderActivity", "tab1");
+            Bundle arg = getArguments();
+            String timeString = "";
+            if (arg != null) {
+                timeString = arg.getString("timeString");
+                int hour = Integer.parseInt(timeString.substring(0,2)),
+                        minute = Integer.parseInt(timeString.substring(3,5)),
+                        day = Integer.parseInt(timeString.substring(7,9)),
+                        month = Integer.parseInt(timeString.substring(10,12)),
+                        year = Integer.parseInt(timeString.substring(13,17));
+                timePickerMode_1.setHour(hour);
+                timePickerMode_1.setMinute(minute);
+                datePickerMode_1.updateDate(year, month, day);
+            }
+            //Log.d("addReminderActivity", "tab1 " + timeString);
 
             return view;
         }
@@ -83,13 +124,11 @@ public class ModeNotifPagerAdapter extends FragmentPagerAdapter {
                     + minuteFisrt + String.valueOf(timePickerMode_1.getMinute());
         }
 
-        public void setHour(int hour){
-            timePickerMode_1.setHour(hour);
-        }
-
         public String getDay(){
-            return String.valueOf(datePickerMode_1.getDayOfMonth() + "/"
-                    + String.valueOf(datePickerMode_1.getMonth() + 1)) + "/"
+            String dayFirst = datePickerMode_1.getDayOfMonth() / 10 == 0 ? "0" : "";
+            String monthFisrt = (datePickerMode_1.getMonth() + 1)/ 10 == 0 ? "0" : "";
+            return dayFirst + String.valueOf(datePickerMode_1.getDayOfMonth() + "/"
+                    + monthFisrt + String.valueOf(datePickerMode_1.getMonth() + 1)) + "/"
                     + String.valueOf(datePickerMode_1.getYear());
         }
     }
@@ -97,6 +136,17 @@ public class ModeNotifPagerAdapter extends FragmentPagerAdapter {
     public static class mode_notif_2 extends Fragment {
         TimePicker timePicker;
         CheckBox cbMonday, cbTuesday, cbWednesday, cbThursday, cbFriday, cbSaturday, cbSunday;
+
+        public static mode_notif_2 newInstance(String timeString) {
+
+            Bundle args = new Bundle();
+            args.putString("timeString", timeString);
+
+            mode_notif_2 fragment = new mode_notif_2();
+            fragment.setArguments(args);
+            return fragment;
+        }
+
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
@@ -109,6 +159,47 @@ public class ModeNotifPagerAdapter extends FragmentPagerAdapter {
             cbFriday = view.findViewById(R.id.cb_friday);
             cbSaturday = view.findViewById(R.id.cb_saturday);
             cbSunday = view.findViewById(R.id.cb_sunday);
+
+            Bundle arg = getArguments();
+            String timeString = "";
+            if (arg != null) {
+                timeString = arg.getString("timeString");
+                int hour = Integer.parseInt(timeString.substring(0,2)),
+                        minute = Integer.parseInt(timeString.substring(3,5));
+                int index = 11; // thu dau tien duoc chon trong string
+                do{
+                    switch (timeString.charAt(index)){
+                        case '2':
+                            cbMonday.setChecked(true);
+                            break;
+                        case '3':
+                            cbTuesday.setChecked(true);
+                            break;
+                        case '4':
+                            cbWednesday.setChecked(true);
+                            break;
+                        case '5':
+                            cbThursday.setChecked(true);
+                            break;
+                        case '6':
+                            cbFriday.setChecked(true);
+                            break;
+                        case '7':
+                            cbSaturday.setChecked(true);
+                            break;
+                        case 'C':
+                            cbSunday.setChecked(true);
+                            break;
+                        default:
+                            break;
+                    }
+                    index++;
+                } while (index < timeString.length());
+                timePicker.setHour(hour);
+                timePicker.setMinute(minute);
+            }
+            Log.d("addReminderActivity", "tab2 " + timeString);
+
             //Log.d("addReminderActivity", "tab2");
 
             return view;
@@ -121,10 +212,6 @@ public class ModeNotifPagerAdapter extends FragmentPagerAdapter {
                     + minuteFisrt + String.valueOf(timePicker.getMinute());
         }
 
-        public void setHour(int hour){
-            timePicker.setHour(hour);
-        }
-
         public String getDay(){
             String day = cbMonday.isChecked()? "2/" : "";
             day += cbTuesday.isChecked()? "3/" : "";
@@ -134,14 +221,25 @@ public class ModeNotifPagerAdapter extends FragmentPagerAdapter {
             day += cbSaturday.isChecked()? "7/" : "";
             day += cbSunday.isChecked()? "CN/" : "";
             day = day.substring(0, day.length() > 1 ? day.length() - 1 : 0);
-            return day;
+            return "Thứ " + day;
         }
 
     }
     public static class mode_notif_3 extends Fragment {
         View view;
-        public EditText time_repeat;
-        public NumberPicker time_type;
+        private TimePicker time_start;
+        private EditText time_repeat;
+        private NumberPicker time_type;
+
+        public static mode_notif_3 newInstance(String timeString) {
+
+            Bundle args = new Bundle();
+            args.putString("timeString", timeString);
+
+            mode_notif_3 fragment = new mode_notif_3();
+            fragment.setArguments(args);
+            return fragment;
+        }
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -157,29 +255,64 @@ public class ModeNotifPagerAdapter extends FragmentPagerAdapter {
             time_type.setDisplayedValues(listLoopMode);
 
             time_repeat = view.findViewById(R.id.et_thoi_gian_loop);
-            time_type = view.findViewById(R.id.number_Picker);
+            time_start = view.findViewById(R.id.timePicker);
 
-            this.time_repeat = view.findViewById(R.id.et_thoi_gian_loop);
-            this.time_type = view.findViewById(R.id.number_Picker);
+            Bundle arg = getArguments();
+            String timeString = "";
+            if (arg != null) {
+                timeString = arg.getString("timeString");
+                int hour = Integer.parseInt(timeString.substring(0,2)),
+                        minute = Integer.parseInt(timeString.substring(3,5));
+                time_start.setHour(hour);
+                time_start.setMinute(minute);
+                String timeRepeatString = timeString.substring(11, timeString.indexOf(" ", 11));
+                String timeTypeString = timeString.substring(timeString.indexOf(" ", 11) + 1);
+                int valueType = 0;
+                switch (timeTypeString){
+                    case "Phút":
+                        valueType = 0;
+                        break;
+                    case "Giờ":
+                        valueType = 1;
+                        break;
+                    case "Ngày":
+                        valueType = 2;
+                        break;
+                    case "Tuần":
+                        valueType = 3;
+                        break;
+                    case "Tháng":
+                        valueType = 4;
+                        break;
+                    case "Năm":
+                        valueType = 5;
+                        break;
+                    default:
+                        break;
+                }
+                time_type.setValue(valueType);
+                time_repeat.setText(timeRepeatString);
+            }
+
             //Log.d("addReminderActivity", "tab3");
 
             return view;
+        }
+
+        public String getTimeStart(){
+            String minuteFisrt = time_start.getMinute() / 10 == 0 ? "0" : "";
+            String hourFisrt = time_start.getHour() / 10 == 0 ? "0" : "";
+            return hourFisrt + String.valueOf(time_start.getHour()) + ":"
+                    + minuteFisrt + String.valueOf(time_start.getMinute());
         }
 
         public String getTimeRepeat() {
             return String.valueOf(time_repeat.getText());
         }
 
-        public void setTime_repeat(EditText time_repeat) {
-            this.time_repeat = time_repeat;
-        }
-
         public String getTime_type() {
             return String.valueOf(time_type.getDisplayedValues()[time_type.getValue()]);
         }
 
-        public void setTime_type(NumberPicker time_type) {
-            this.time_type = time_type;
-        }
     }
 }

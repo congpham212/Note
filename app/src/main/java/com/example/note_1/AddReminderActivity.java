@@ -53,10 +53,6 @@ public class AddReminderActivity extends AppCompatActivity implements View.OnCli
 
         tlModeNotif = findViewById(R.id.tl_mode_notif);
         vpModeNotif = findViewById(R.id.vp_mode_notif);
-        pgAdapter = new ModeNotifPagerAdapter(getSupportFragmentManager());
-        vpModeNotif.setAdapter(pgAdapter);
-        tlModeNotif.setupWithViewPager(vpModeNotif);
-        vpModeNotif.getCurrentItem();
 
         Intent intent = getIntent();
         idNote = intent.getExtras().getInt("idNote");
@@ -69,21 +65,16 @@ public class AddReminderActivity extends AppCompatActivity implements View.OnCli
             et_content.setText(note.getContent());
 
             int modeAlarm = note.getModeAlarm();
+            pgAdapter = new ModeNotifPagerAdapter(getSupportFragmentManager(), modeAlarm, note.getTime());
+            vpModeNotif.setAdapter(pgAdapter);
             vpModeNotif.setCurrentItem(modeAlarm);
-            String timeString = note.getTime();
-
-            switch (modeAlarm){
-                case 0:
-                    //Log.d("addReminderActivity", String.valueOf(pgAdapter.tab1.timePickerMode_1.isShown()));
-                    break;
-                case 1:
-                    int hour = Integer.parseInt(timeString.substring(0,2));
-                    //Log.d("addReminderActivity", "pgAdapter.tab2.getHour()");
-                    ;
-            }
-
         }
-        else isModeAdd = true;
+        else {
+            isModeAdd = true;
+            pgAdapter = new ModeNotifPagerAdapter(getSupportFragmentManager());
+            vpModeNotif.setAdapter(pgAdapter);
+        }
+        tlModeNotif.setupWithViewPager(vpModeNotif);
 
         vpModeNotif.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -148,9 +139,10 @@ public class AddReminderActivity extends AppCompatActivity implements View.OnCli
                     timeString = hour + ", " + day;
                 } else
                 if(position == 2){
+                    hour = pgAdapter.tab3.getTimeStart();
                     timeRepeat = pgAdapter.tab3.getTimeRepeat();
                     type = pgAdapter.tab3.getTime_type();
-                    timeString = "Mỗi " + timeRepeat + " " + type;
+                    timeString = hour + ", Mỗi " + timeRepeat + " " + type;
                 }
 
                 MyDatabaseHelper db = new MyDatabaseHelper(this);

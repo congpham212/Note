@@ -48,7 +48,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
 
         noteViewHolder.tv_time.setText(note.getTime());
         noteViewHolder.tv_title.setText(note.getTitle());
-        noteViewHolder.tv_mode_alarm.setText(Integer.toString(note.getModeAlarm()));
+        //noteViewHolder.tv_mode_alarm.setText(Integer.toString(note.getModeAlarm()));
         noteViewHolder.ib_alarm.setImageResource(note.isAlarm() ? R.drawable.ic_on_alarm_24 : R.drawable.ic_off_alarm_24);
         noteViewHolder.cb_done.setChecked(note.isDone());
     }
@@ -70,7 +70,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
             super(itemView);
             tv_time = itemView.findViewById(R.id.tv_time_reminder);
             tv_title = itemView.findViewById(R.id.tv_title_reminder);
-            tv_mode_alarm = itemView.findViewById(R.id.tv_mode_alarm);
+            //tv_mode_alarm = itemView.findViewById(R.id.tv_mode_alarm);
             cb_done = itemView.findViewById(R.id.cb_done_reminder);
             ib_alarm = itemView.findViewById(R.id.ib_alarm);
 
@@ -105,7 +105,6 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
             itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    Toast.makeText(context, "onLong", Toast.LENGTH_SHORT).show();
                     AlertDialog.Builder deleteDialog = new AlertDialog.Builder(context);
                     deleteDialog.setTitle(R.string.remove_reminder)
                             .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {

@@ -19,7 +19,7 @@
                 </shape>
             </item>
 
-            <item
+            <!--<item
                 android:width="8dp"
                 android:height="2dp"
                 android:top="20dp"
@@ -44,7 +44,7 @@
                         <solid android:color="#fff"/>
                     </shape>
                 </rotate>
-            </item>
+            </item>-->
         </layer-list>
     </item>
 
