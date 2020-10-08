@@ -198,9 +198,7 @@ public class ModeNotifPagerAdapter extends FragmentPagerAdapter {
                 timePicker.setHour(hour);
                 timePicker.setMinute(minute);
             }
-            Log.d("addReminderActivity", "tab2 " + timeString);
-
-            //Log.d("addReminderActivity", "tab2");
+            //Log.d("addReminderActivity", "tab2 " + timeString);
 
             return view;
         }

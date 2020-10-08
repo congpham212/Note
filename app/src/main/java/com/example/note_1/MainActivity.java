@@ -3,6 +3,7 @@ package com.example.note_1;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
@@ -19,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    private Button btnAddNote;
+    private FloatingActionButton btnAddNote;
     private Intent intent;
     private RecyclerView rv_note;
     private NoteAdapter noteAdapter;
@@ -53,6 +54,34 @@ public class MainActivity extends AppCompatActivity {
 //        RecyclerView scroll vertical
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         rv_note.setLayoutManager(linearLayoutManager);
+
+        RecyclerViewSwipeListener recyclerViewSwipeListener = new RecyclerViewSwipeListener(false) {
+
+            @Override
+            public void onSwipeUp() {
+                Toast.makeText(MainActivity.this, "Vuốt lên", Toast.LENGTH_SHORT).show();
+                Log.d("MainActivity","asd");
+            }
+
+            @Override
+            public void onSwipeDown() {
+                Toast.makeText(MainActivity.this, "Vuốt xuống", Toast.LENGTH_SHORT).show();
+                Log.d("MainActivity","asd");
+            }
+
+            @Override
+            public void onSwipeLeft() {
+                Toast.makeText(MainActivity.this, "Vuốt sang trai", Toast.LENGTH_SHORT).show();
+                Log.d("MainActivity","asd");
+            }
+
+            @Override
+            public void onSwipeRight() {
+                Toast.makeText(MainActivity.this, "Vuốt sang phai", Toast.LENGTH_SHORT).show();
+            }
+        };
+
+        rv_note.setOnFlingListener(recyclerViewSwipeListener);
 
     }
 

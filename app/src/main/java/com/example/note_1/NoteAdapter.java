@@ -92,9 +92,6 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     Note note = noteList.get(getAdapterPosition());
-                    if(isChecked){
-                        //Toast.makeText(context,"id: " + note.getId() + " --- Title: " + note.getTitle(), Toast.LENGTH_SHORT).show();
-                    }
                     note.setDone(isChecked);
                     MyDatabaseHelper db = new MyDatabaseHelper(context);
                     db.editNote(note.getId(),note);
@@ -124,7 +121,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
 
                                 }
                             });
-                    deleteDialog.show();
+                    //deleteDialog.show();
                     return true; // tat su kien on click khi on long click
                 }
             });
@@ -136,12 +133,10 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
                     if (note.isAlarm()) {
                         note.setAlarm(false);
                         ib_alarm.setImageResource(R.drawable.ic_off_alarm_24);
-                        Toast.makeText(context,"F", Toast.LENGTH_SHORT).show();
                     }
                     else {
                         note.setAlarm(true);
                         ib_alarm.setImageResource(R.drawable.ic_on_alarm_24);
-                        Toast.makeText(context,"T", Toast.LENGTH_SHORT).show();
                     }
                     MyDatabaseHelper db = new MyDatabaseHelper(context);
                     db.editNote(note.getId(),note);

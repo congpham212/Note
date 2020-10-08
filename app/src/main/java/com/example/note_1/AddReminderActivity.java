@@ -126,6 +126,11 @@ public class AddReminderActivity extends AppCompatActivity implements View.OnCli
                 String contentNote = String.valueOf(et_content.getText());
                 String hour, day, timeRepeat, type, timeString = "";
 
+                if (titleNote.equals("") && contentNote.equals("")) {
+                    finish();
+                    return true;
+                }
+
                 // Lay thoi gian thong bao de luu vao database
                 int position = vpModeNotif.getCurrentItem();
                 if(position == 0){
